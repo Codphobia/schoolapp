@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1036671477290",
+    "firebase_url": "https://onlineschoolfinderapp-default-rtdb.firebaseio.com",
+    "project_id": "onlineschoolfinderapp",
+    "storage_bucket": "onlineschoolfinderapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036671477290:android:8060f87929be1f95208553",
+        "android_client_info": {
+          "package_name": "com.example.school_finder_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036671477290-01etb877cs0s8fen2l45urj5lcn3qotj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKvb1clMGbHvVHrlYdeWA7VTZ7WIeMJdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036671477290-01etb877cs0s8fen2l45urj5lcn3qotj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036671477290:android:e444599a9878bb3e208553",
+        "android_client_info": {
+          "package_name": "com.example.schoolapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036671477290-01etb877cs0s8fen2l45urj5lcn3qotj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKvb1clMGbHvVHrlYdeWA7VTZ7WIeMJdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036671477290-01etb877cs0s8fen2l45urj5lcn3qotj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
