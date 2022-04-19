@@ -23,4 +23,19 @@ class AuthServices {
       Fluttertoast.showToast(msg: e.toString());
     }
   }
+
+  Future signIn(String email, String password) async {
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      return userCredential.user;
+    } on FirebaseException catch (e) {
+      if (e.code == 'user-not-found') {
+        Fluttertoast.showToast(msg: 'User not found');
+      } else if (e.code == 'wrong-password') {
+        Fluttertoast.showToast(msg: 'Wrong password');
+      }
+    }
+  }
 }

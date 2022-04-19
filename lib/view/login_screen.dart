@@ -1,13 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:schoolapp/view/signup_screen.dart';
 
 import '../view model/authmanager.dart';
-
 import 'parents/parents_dasboard_screen.dart';
-import 'school admin/school_admin_dasboard_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -128,32 +124,12 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () async {
                     if (_formkey.currentState!.validate()) {
                       try {
-                        FirebaseAuth auth = FirebaseAuth.instance;
-                        UserCredential userCredential =
-                            await auth.signInWithEmailAndPassword(
-                                email: email, password: password);
-                        if (userCredential.user != null) {
-                          DatabaseReference userRef =
-                              FirebaseDatabase.instance.ref().child('parents');
-                          String uid = userCredential.user!.uid;
-
-                          DatabaseEvent event = await userRef.child(uid).once();
-                          DataSnapshot snapshot = event.snapshot;
-                          Map<String, dynamic> map =
-                              Map<String, dynamic>.from(snapshot.value as Map);
-                          print(map['role']);
-                          if (map['role'] == 'users') {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const ParentsDasboard();
-                            }));
-                          } else {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const SchoolAdminDasboard();
-                            }));
-                          }
-                        }
+                        authServices.signIn(email, password);
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) {
+                            return const ParentsDasboard();
+                          },
+                        ));
                       } catch (e) {
                         Fluttertoast.showToast(msg: e.toString());
                       }
