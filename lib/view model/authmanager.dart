@@ -17,7 +17,7 @@ class AuthServices {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = userCredential.user;
-      await databaseManager.createParent(user!.uid, name, email, 'users');
+      await databaseManager.createParent(user!.uid, name, email, false);
       return user;
     } on FirebaseException catch (e) {
       Fluttertoast.showToast(msg: e.toString());

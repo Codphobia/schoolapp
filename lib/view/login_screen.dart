@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:schoolapp/view/school%20admin/school_admin_dasboard_screen.dart';
 import 'package:schoolapp/view/signup_screen.dart';
 
 import '../view model/authmanager.dart';
@@ -14,6 +17,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   AuthServices authServices = AuthServices();
+  final _database = FirebaseDatabase.instance;
 
   final _formkey = GlobalKey<FormState>();
   var emailEditingController = TextEditingController();
@@ -124,12 +128,30 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () async {
                     if (_formkey.currentState!.validate()) {
                       try {
-                        authServices.signIn(email, password);
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return const ParentsDasboard();
-                          },
-                        ));
+                        User user = await authServices.signIn(email, password);
+                        String uid = user.uid;
+                        _database
+                            .ref()
+                            .child("users/$uid/isAdmin")
+                            .onValue
+                            .listen((event) {
+                          bool isAdmin =
+                              event.snapshot.value.toString() == "true"
+                                  ? true
+                                  : false;
+                          if (isAdmin == true) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SchoolAdminDasboard()));
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ParentsDasboard()));
+                          }
+                        });
                       } catch (e) {
                         Fluttertoast.showToast(msg: e.toString());
                       }
